@@ -1,0 +1,4237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+        name="description"
+        content="Sunshine Reading - Academic IELTS Reading Practice"
+    >
+
+    <title>
+        Sunshine Reading | Academic Reading Practice
+    </title>
+
+
+    <!-- =========================================================
+         GOOGLE FONTS
+    ========================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="s.css">
+
+
+    <!-- =========================================================
+         BOOTSTRAP 5.3.8
+         Official CDN
+    ========================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous"
+    >
+
+
+    <!-- =========================================================
+         BOOTSTRAP ICONS
+    ========================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    >
+
+
+    <style>
+
+        /* =====================================================
+           SUNSHINE DESIGN TOKENS
+        ====================================================== */
+
+        :root {
+
+            --sunshine-navy: #073451;
+            --sunshine-navy-dark: #042a42;
+
+            --sunshine-teal: #006b78;
+            --sunshine-teal-dark: #00525d;
+            --sunshine-teal-soft: #eaf7f7;
+
+            --sunshine-gold: #e7aa2e;
+            --sunshine-gold-dark: #c9870c;
+            --sunshine-gold-soft: #fff2d3;
+
+            --sunshine-cream: #fffaf0;
+            --sunshine-cream-dark: #f7f0df;
+
+            --sunshine-white: #ffffff;
+
+            --sunshine-border: #dfe5e6;
+            --sunshine-border-dark: #cbd5d8;
+
+            --sunshine-text: #173b57;
+            --sunshine-muted: #667a8a;
+
+            --sunshine-shadow:
+                0 8px 28px rgba(7, 52, 81, .08);
+
+            --sunshine-shadow-lg:
+                0 16px 45px rgba(7, 52, 81, .11);
+
+            --header-height: 78px;
+            --exam-header-height: 82px;
+            --bottom-bar-height: 88px;
+        }
+
+
+        /* =====================================================
+           GLOBAL RESET
+        ====================================================== */
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                "DM Sans",
+                sans-serif;
+
+            color:
+                var(--sunshine-text);
+
+            background:
+                var(--sunshine-cream);
+
+            overflow: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+
+            font-family:
+                "Poppins",
+                sans-serif;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+
+            font-family:
+                inherit;
+        }
+
+        button {
+
+            -webkit-tap-highlight-color:
+                transparent;
+        }
+
+
+        /* =====================================================
+           GLOBAL HEADER
+        ====================================================== */
+
+        .site-header {
+
+            height:
+                var(--header-height);
+
+            background:
+                rgba(255, 255, 255, .97);
+
+            border-bottom:
+                1px solid rgba(7, 52, 81, .07);
+
+            position:
+                relative;
+
+            z-index:
+                1000;
+        }
+
+
+        .site-navbar {
+
+            height:
+                var(--header-height);
+        }
+
+
+        /* =====================================================
+           BRAND
+        ====================================================== */
+
+        .brand-logo {
+
+            width:
+                215px;
+
+            max-width:
+                100%;
+
+            height:
+                auto;
+
+            display:
+                block;
+        }
+
+
+        /* =====================================================
+           MAIN NAVIGATION
+        ====================================================== */
+
+
+        .main-navbar {
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid var(--sunshine-border);
+            padding: 14px 0 !important;
+            white-space:nowrap;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: linear-gradient(
+                135deg,
+                var(--sunshine-gold),
+                var(--sunshine-gold-light)
+            );
+            color: var(--sunshine-navy);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            box-shadow: 0 7px 20px rgba(229, 163, 41, 0.25);
+        }
+
+        .brand-title {
+            color: var(--sunshine-navy);
+            font-family: "Poppins", sans-serif;
+            font-weight: 800;
+            font-size: 17px;
+            line-height: 1.1;
+        }
+
+        .brand-subtitle {
+            color: var(--sunshine-teal);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--sunshine-navy);
+            font-size: 14px;
+            font-weight: 600;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding: 9px 12px !important;
+            transition: 0.25s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--sunshine-teal);
+        }
+
+        .nav-search {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--sunshine-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--sunshine-navy);
+            transition: 0.25s ease;
+        }
+
+        .nav-search:hover {
+            background: var(--sunshine-cream);
+            color: var(--sunshine-teal);
+        }
+
+        .btn-sunshine-outline {
+            border: 1.5px solid var(--sunshine-navy);
+            color: var(--sunshine-navy);
+            background: transparent;
+            border-radius: 10px;
+            font-weight: 700;
+            padding: 10px 18px;
+        }
+
+        .btn-sunshine-outline:hover {
+            background: var(--sunshine-navy);
+            color: white;
+        }
+
+        .btn-sunshine {
+            background: var(--sunshine-gold);
+            border: 1px solid var(--sunshine-gold);
+            color: var(--sunshine-navy);
+            border-radius: 10px;
+            font-weight: 800;
+            padding: 11px 20px;
+            transition: 0.25s ease;
+        }
+
+        .btn-sunshine:hover {
+            background: var(--sunshine-gold-light);
+            border-color: var(--sunshine-gold-light);
+            color: var(--sunshine-navy);
+            transform: translateY(-2px);
+        }
+
+        .main-nav .nav-link {
+
+            color:
+                var(--sunshine-navy);
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+
+            padding:
+                .65rem .72rem !important;
+
+            white-space:
+                nowrap;
+
+            transition:
+                color .2s ease;
+        }
+
+
+        .main-nav .nav-link:hover,
+        .main-nav .nav-link:focus {
+
+            color:
+                var(--sunshine-gold-dark);
+        }
+
+
+        .main-nav .dropdown-menu {
+
+            border:
+                1px solid rgba(7, 52, 81, .08);
+
+            border-radius:
+                12px;
+
+            padding:
+                .45rem;
+
+            box-shadow:
+                var(--sunshine-shadow-lg);
+        }
+
+
+        .main-nav .dropdown-item {
+
+            color:
+                var(--sunshine-navy);
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+
+            border-radius:
+                8px;
+
+            padding:
+                .55rem .75rem;
+        }
+
+
+        .main-nav .dropdown-item:hover {
+
+            background:
+                var(--sunshine-gold-soft);
+
+            color:
+                var(--sunshine-navy);
+        }
+
+        .avatar{font-size: 35px;}
+
+
+        /* =====================================================
+           USER AREA
+        ====================================================== */
+
+        .student-user {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            color:
+                var(--sunshine-white);
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+        }
+
+
+        .student-avatar {
+
+            width:
+                38px;
+
+            height:
+                38px;
+
+            border-radius:
+                50%;
+
+            background:
+                rgba(255, 255, 255, .96);
+
+            color:
+                var(--sunshine-teal);
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                20px;
+        }
+
+        .intro{
+            color:#003f48;
+        }
+        .intro-sign{
+        background:#fff;
+        color:#003f48;
+        display:inline-flex;
+        font-size:14px;
+        }
+
+
+        /* =====================================================
+           EXAM HEADER
+        ====================================================== */
+
+        .exam-header {
+
+            height:
+                var(--exam-header-height);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #006b78 0%,
+                    #005966 55%,
+                    #004b57 100%
+                );
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+
+            color:
+                white;
+        }
+
+
+        .exam-header::before {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            inset:
+                0;
+
+            background:
+                radial-gradient(
+                    circle at 72% 30%,
+                    rgba(231,170,46,.20),
+                    transparent 22%
+                ),
+                radial-gradient(
+                    circle at 92% 50%,
+                    rgba(255,255,255,.08),
+                    transparent 25%
+                );
+
+            pointer-events:
+                none;
+        }
+
+
+        .exam-header-inner {
+
+            height:
+                100%;
+
+            position:
+                relative;
+
+            z-index:
+                2;
+        }
+
+
+        .exam-title {
+
+            margin:
+                0;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                38px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -.025em;
+        }
+
+
+        .exam-divider {
+
+            width:
+                2px;
+
+            height:
+                34px;
+
+            background:
+                rgba(255, 255, 255, .75);
+
+            margin:
+                0 25px;
+        }
+
+
+        .exam-subtitle {
+
+            font-size:
+                18px;
+
+            color:
+                rgba(255, 255, 255, .92);
+
+            font-weight:
+                500;
+        }
+
+
+        /* =====================================================
+           TIMER
+        ====================================================== */
+
+        .timer-box {
+
+            min-width:
+                205px;
+
+            height:
+                64px;
+
+            border:
+                1px solid rgba(231,170,46,.85);
+
+            border-radius:
+                11px;
+
+            background:
+                rgba(0, 65, 75, .35);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                12px;
+
+            padding:
+                8px 17px;
+        }
+
+
+        .timer-icon {
+
+            font-size:
+                30px;
+
+            color:
+                #f3c04a;
+        }
+
+
+        .timer-label {
+
+            font-size:
+                11px;
+
+            color:
+                rgba(255,255,255,.88);
+
+            line-height:
+                1.1;
+
+            margin-bottom:
+                3px;
+        }
+
+
+        .timer-value {
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                22px;
+
+            font-weight:
+                800;
+
+            line-height:
+                1;
+        }
+
+
+        /* =====================================================
+           APPLICATION WORKSPACE
+        ====================================================== */
+
+        .reading-app {
+
+            height:
+                calc(
+                    100vh
+                    - var(--header-height)
+                    - var(--exam-header-height)
+                    - var(--bottom-bar-height)
+                );
+
+            min-height:
+                520px;
+
+            display:
+                flex;
+
+            background:
+                var(--sunshine-cream);
+        }
+
+
+        /* =====================================================
+           SPLIT PANES
+        ====================================================== */
+
+        .reading-pane,
+        .question-pane {
+
+            min-width:
+                0;
+
+            height:
+                100%;
+
+            background:
+                var(--sunshine-white);
+
+            position:
+                relative;
+
+            overflow:
+                hidden;
+        }
+
+
+        .reading-pane {
+
+            flex:
+                0 0 55%;
+
+            max-width:
+                55%;
+
+            border-right:
+                1px solid var(--sunshine-border);
+        }
+
+
+        .question-pane {
+
+            flex:
+                0 0 45%;
+
+            max-width:
+                45%;
+        }
+
+
+        /* =====================================================
+           LEFT TOOLBAR
+        ====================================================== */
+
+        .passage-toolbar {
+
+            height:
+                68px;
+
+            background:
+                #fffdf8;
+
+            border-bottom:
+                1px solid var(--sunshine-border);
+
+            display:
+                flex;
+
+            align-items:
+                stretch;
+
+            gap:
+                8px;
+
+            padding:
+                10px 38px;
+        }
+
+
+        .tool-tab {
+
+            border:
+                0;
+
+            background:
+                transparent;
+
+            color:
+                var(--sunshine-navy);
+
+            padding:
+                0 22px;
+
+            border-radius:
+                9px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                9px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+            white-space:
+                nowrap;
+        }
+
+
+        .tool-tab i {
+
+            font-size:
+                19px;
+        }
+
+
+        .tool-tab:hover {
+
+            background:
+                #faf5e8;
+        }
+
+
+        .tool-tab.active {
+
+            background:
+                var(--sunshine-gold-soft);
+
+            box-shadow:
+                inset 0 -2px 0 var(--sunshine-gold);
+        }
+
+
+        .toolbar-spacer {
+
+            flex:
+                1;
+        }
+
+
+        .tool-action {
+
+            border:
+                0;
+
+            background:
+                #f8f9f8;
+
+            color:
+                var(--sunshine-navy);
+
+            min-width:
+                100px;
+
+            border-radius:
+                9px;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                7px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+        }
+
+
+        .tool-action:hover {
+
+            background:
+                var(--sunshine-gold-soft);
+        }
+
+
+        .fullscreen-btn {
+
+            width:
+                43px;
+
+            min-width:
+                43px;
+
+            background:
+                #fff;
+
+            border:
+                1px solid var(--sunshine-border);
+        }
+
+
+        /* =====================================================
+           PASSAGE BODY
+        ====================================================== */
+
+        .passage-scroll {
+
+            height:
+                calc(
+                    100%
+                    - 68px
+                );
+
+            overflow-y:
+                auto;
+
+            padding:
+                20px 35px 30px 38px;
+
+            scrollbar-width:
+                thin;
+
+            scrollbar-color:
+                #aeb7ba #f3f4f2;
+        }
+
+
+        .passage-scroll::-webkit-scrollbar {
+
+            width:
+                10px;
+        }
+
+
+        .passage-scroll::-webkit-scrollbar-track {
+
+            background:
+                #f3f4f2;
+        }
+
+
+        .passage-scroll::-webkit-scrollbar-thumb {
+
+            background:
+                #aeb7ba;
+
+            border-radius:
+                20px;
+        }
+
+
+        .passage-title {
+
+            margin:
+                0 0 17px;
+
+            color:
+                var(--sunshine-navy);
+
+            font-size:
+                30px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -.025em;
+        }
+
+
+        .paragraph {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                42px minmax(0, 1fr);
+
+            gap:
+                18px;
+
+            margin-bottom:
+                21px;
+        }
+
+
+        .paragraph-label {
+
+            width:
+                40px;
+
+            height:
+                40px;
+
+            border-radius:
+                7px;
+
+            background:
+                #e7f5f4;
+
+            color:
+                var(--sunshine-teal);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                16px;
+
+            font-weight:
+                700;
+        }
+
+
+        .paragraph-text {
+
+            margin:
+                0;
+
+            color:
+                #334f66;
+
+            font-size:
+                16px;
+
+            line-height:
+                1.47;
+        }
+
+
+        .passage-highlight {
+
+            background:
+                #fff0b7;
+
+            border-radius:
+                3px;
+
+            padding:
+                1px 2px;
+        }
+
+
+        /* =====================================================
+           QUESTION HEADER
+        ====================================================== */
+
+        .question-top {
+
+            height:
+                68px;
+
+            border-bottom:
+                1px solid var(--sunshine-border);
+
+            background:
+                #fffdf9;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                0 34px;
+        }
+
+
+        .question-count {
+
+            margin:
+                0;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            color:
+                var(--sunshine-navy);
+
+            font-size:
+                19px;
+
+            font-weight:
+                800;
+        }
+
+
+        .question-filter {
+
+            border:
+                1px solid var(--sunshine-border);
+
+            background:
+                #fff;
+
+            border-radius:
+                9px;
+
+            padding:
+                9px 14px;
+
+            color:
+                var(--sunshine-navy);
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           QUESTION NAVIGATION
+        ====================================================== */
+
+        .question-navigation {
+
+            padding:
+                9px 25px 11px;
+
+            border-bottom:
+                1px solid #edf0ef;
+
+            background:
+                #fff;
+        }
+
+
+        .question-nav-scroll {
+
+            display:
+                flex;
+
+            gap:
+                7px;
+
+            align-items:
+                center;
+
+            overflow-x:
+                auto;
+
+            scrollbar-width:
+                none;
+        }
+
+
+        .question-nav-scroll::-webkit-scrollbar {
+
+            display:
+                none;
+        }
+
+
+        .question-number {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            flex:
+                0 0 39px;
+
+            border:
+                1px solid var(--sunshine-border);
+
+            border-radius:
+                8px;
+
+            background:
+                #fff;
+
+            color:
+                var(--sunshine-navy);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                all .18s ease;
+        }
+
+
+        .question-number:hover {
+
+            border-color:
+                var(--sunshine-gold);
+
+            background:
+                var(--sunshine-gold-soft);
+        }
+
+
+        .question-number.active {
+
+            background:
+                var(--sunshine-gold);
+
+            border-color:
+                var(--sunshine-gold);
+
+            color:
+                #111;
+        }
+
+
+        .question-arrow {
+
+            width:
+                39px;
+
+            height:
+                39px;
+
+            flex:
+                0 0 39px;
+
+            border:
+                1px solid var(--sunshine-border);
+
+            background:
+                #fff;
+
+            border-radius:
+                8px;
+
+            color:
+                var(--sunshine-navy);
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+        }
+
+
+        /* =====================================================
+           QUESTION CONTENT
+        ====================================================== */
+
+        .question-scroll {
+
+            height:
+                calc(
+                    100%
+                    - 139px
+                );
+
+            overflow-y:
+                auto;
+
+            padding:
+                13px 34px 24px;
+        }
+
+
+        .question-card {
+
+            border:
+                1px solid #eee6d4;
+
+            border-radius:
+                12px;
+
+            background:
+                #fff;
+
+            overflow:
+                hidden;
+
+            box-shadow:
+                0 4px 18px rgba(7,52,81,.03);
+        }
+
+
+        .question-card-header {
+
+            min-height:
+                59px;
+
+            background:
+                #fff8e8;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
+            padding:
+                0 21px;
+        }
+
+
+        .question-heading {
+
+            margin:
+                0;
+
+            color:
+                var(--sunshine-navy);
+
+            font-size:
+                21px;
+
+            font-weight:
+                800;
+        }
+
+
+        .flag-button {
+
+            border:
+                0;
+
+            background:
+                transparent;
+
+            color:
+                var(--sunshine-navy);
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+        }
+
+
+        .flag-button i {
+
+            color:
+                var(--sunshine-gold-dark);
+
+            font-size:
+                18px;
+        }
+
+
+        .question-body {
+
+            padding:
+                16px 21px 21px;
+        }
+
+
+        .instruction {
+
+            color:
+                #4d6273;
+
+            font-size:
+                14px;
+
+            margin-bottom:
+                24px;
+        }
+
+
+        .question-text {
+
+            margin:
+                0 0 22px;
+
+            color:
+                var(--sunshine-navy);
+
+            font-size:
+                17px;
+
+            line-height:
+                1.45;
+
+            font-weight:
+                600;
+        }
+
+
+        /* =====================================================
+           ANSWER OPTIONS
+        ====================================================== */
+
+        .answer-option {
+
+            position:
+                relative;
+
+            display:
+                flex;
+
+            align-items:
+                flex-start;
+
+            gap:
+                13px;
+
+            padding:
+                13px 15px;
+
+            margin-bottom:
+                9px;
+
+            border:
+                1px solid #dce3e5;
+
+            border-radius:
+                9px;
+
+            background:
+                #fff;
+
+            cursor:
+                pointer;
+
+            transition:
+                border-color .18s ease,
+                background .18s ease,
+                box-shadow .18s ease;
+        }
+
+
+        .answer-option:hover {
+
+            border-color:
+                #b9c9ce;
+
+            background:
+                #fcfdfc;
+        }
+
+
+        .answer-option.selected {
+
+            border-color:
+                #9ad4dc;
+
+            background:
+                #effafa;
+
+            box-shadow:
+                inset 0 0 0 1px rgba(0,107,120,.05);
+        }
+
+
+        .answer-radio {
+
+            width:
+                22px;
+
+            height:
+                22px;
+
+            flex:
+                0 0 22px;
+
+            margin-top:
+                1px;
+
+            border:
+                2px solid #8e9ba2;
+
+            border-radius:
+                50%;
+
+            position:
+                relative;
+        }
+
+
+        .answer-option.selected .answer-radio {
+
+            border-color:
+                #00a1b5;
+        }
+
+
+        .answer-option.selected .answer-radio::after {
+
+            content:
+                "";
+
+            position:
+                absolute;
+
+            width:
+                10px;
+
+            height:
+                10px;
+
+            border-radius:
+                50%;
+
+            background:
+                #00a1b5;
+
+            top:
+                50%;
+
+            left:
+                50%;
+
+            transform:
+                translate(-50%, -50%);
+        }
+
+
+        .answer-letter {
+
+            color:
+                var(--sunshine-navy);
+
+            font-weight:
+                700;
+
+            font-size:
+                14px;
+        }
+
+
+        .answer-text {
+
+            color:
+                #395267;
+
+            font-size:
+                14px;
+
+            line-height:
+                1.4;
+        }
+
+
+        /* =====================================================
+           QUESTION FOOTER
+        ====================================================== */
+
+        .question-footer {
+
+            height:
+                92px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                13px;
+
+            padding:
+                13px 34px;
+
+            border-top:
+                1px solid var(--sunshine-border);
+
+            background:
+                #fff;
+        }
+
+
+        .btn-question {
+
+            min-height:
+                51px;
+
+            border-radius:
+                9px;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                8px;
+        }
+
+
+        .btn-previous {
+
+            flex:
+                1;
+
+            border:
+                1px solid var(--sunshine-border-dark);
+
+            background:
+                #fff;
+
+            color:
+                var(--sunshine-navy);
+        }
+
+
+        .btn-previous:hover {
+
+            background:
+                #f7f9f8;
+
+            border-color:
+                #9aaeb4;
+        }
+
+
+        .btn-next {
+
+            flex:
+                1;
+
+            border:
+                0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1bb42,
+                    #e2a127
+                );
+
+            color:
+                #111;
+        }
+
+
+        .btn-next:hover {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e7aa2e,
+                    #d89518
+                );
+
+            color:
+                #111;
+        }
+
+
+        /* =====================================================
+           BOTTOM APPLICATION BAR
+        ====================================================== */
+
+        .bottom-bar {
+
+            height:
+                var(--bottom-bar-height);
+
+            background:
+                rgba(255,255,255,.98);
+
+            border-top:
+                1px solid var(--sunshine-border);
+
+            box-shadow:
+                0 -5px 20px rgba(7,52,81,.04);
+
+            position:
+                relative;
+
+            z-index:
+                100;
+        }
+
+
+        .bottom-bar-inner {
+
+            height:
+                100%;
+        }
+
+
+        .review-button {
+
+            min-height:
+                50px;
+
+            border:
+                1px solid var(--sunshine-border-dark);
+
+            background:
+                #fff;
+
+            color:
+                var(--sunshine-navy);
+
+            border-radius:
+                9px;
+
+            padding:
+                0 21px;
+
+            font-weight:
+                700;
+        }
+
+
+        .review-button:hover {
+
+            background:
+                #f8faf9;
+        }
+
+
+        /* =====================================================
+           PROGRESS
+        ====================================================== */
+
+        .progress-area {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                14px;
+        }
+
+
+        .progress-label {
+
+            color:
+                var(--sunshine-navy);
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+            white-space:
+                nowrap;
+        }
+
+
+        .progress {
+
+            width:
+                310px;
+
+            height:
+                10px;
+
+            background:
+                #e1e7e8;
+
+            border-radius:
+                50rem;
+
+            overflow:
+                hidden;
+        }
+
+
+        .progress-bar {
+
+            background:
+                var(--sunshine-teal);
+
+            border-radius:
+                inherit;
+        }
+
+
+        .progress-number {
+
+            color:
+                var(--sunshine-navy);
+
+            font-size:
+                13px;
+
+            font-weight:
+                700;
+
+            white-space:
+                nowrap;
+        }
+
+
+        .save-button {
+
+            min-height:
+                50px;
+
+            border:
+                0;
+
+            border-radius:
+                9px;
+
+            background:
+                var(--sunshine-teal-dark);
+
+            color:
+                white;
+
+            padding:
+                0 23px;
+
+            font-family:
+                "Poppins",
+                sans-serif;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+        }
+
+
+        .save-button:hover {
+
+            background:
+                #003f48;
+
+            color:
+                #fff;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE TABLET
+        ====================================================== */
+
+        @media (max-width: 1399.98px) {
+
+            .brand-logo {
+
+                width:
+                    190px;
+            }
+
+            .main-nav .nav-link {
+
+                font-size:
+                    13px;
+
+                padding-left:
+                    .45rem !important;
+
+                padding-right:
+                    .45rem !important;
+            }
+
+            .exam-title {
+
+                font-size:
+                    34px;
+            }
+
+            .passage-toolbar {
+
+                padding-left:
+                    22px;
+
+                padding-right:
+                    22px;
+            }
+
+            .passage-scroll {
+
+                padding-left:
+                    25px;
+
+                padding-right:
+                    25px;
+            }
+
+            .question-top {
+
+                padding-left:
+                    24px;
+
+                padding-right:
+                    24px;
+            }
+
+            .question-scroll {
+
+                padding-left:
+                    24px;
+
+                padding-right:
+                    24px;
+            }
+
+            .progress {
+
+                width:
+                    240px;
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ====================================================== */
+
+        @media (max-width: 991.98px) {
+
+            body {
+
+                overflow:
+                    auto;
+            }
+
+
+            .site-header {
+
+                height:
+                    auto;
+            }
+
+
+            .site-navbar {
+
+                height:
+                    auto;
+
+                min-height:
+                    72px;
+            }
+
+
+            .navbar-collapse {
+
+                margin-top:
+                    10px;
+
+                padding:
+                    12px;
+
+                background:
+                    white;
+
+                border-radius:
+                    12px;
+
+                box-shadow:
+                    var(--sunshine-shadow);
+            }
+
+
+            .main-nav {
+
+                align-items:
+                    stretch !important;
+            }
+
+
+            .exam-header {
+
+                height:
+                    auto;
+
+                min-height:
+                    76px;
+            }
+
+
+            .exam-header-inner {
+
+                min-height:
+                    76px;
+            }
+
+
+            .exam-title {
+
+                font-size:
+                    28px;
+            }
+
+
+            .exam-subtitle {
+
+                font-size:
+                    15px;
+            }
+
+
+            .reading-app {
+
+                height:
+                    auto;
+
+                min-height:
+                    0;
+
+                display:
+                    block;
+            }
+
+
+            .reading-pane,
+            .question-pane {
+
+                width:
+                    100%;
+
+                max-width:
+                    100%;
+
+                height:
+                    600px;
+            }
+
+
+            .reading-pane {
+
+                border-right:
+                    0;
+
+                border-bottom:
+                    5px solid #edf1ef;
+            }
+
+
+            .question-pane {
+
+                height:
+                    auto;
+
+                min-height:
+                    650px;
+            }
+
+
+            .bottom-bar {
+
+                height:
+                    auto;
+
+                min-height:
+                    88px;
+            }
+
+
+            .bottom-bar-inner {
+
+                padding-top:
+                    15px;
+
+                padding-bottom:
+                    15px;
+            }
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 767.98px) {
+
+            :root {
+
+                --header-height:
+                    70px;
+            }
+
+
+            .brand-logo {
+
+                width:
+                    165px;
+            }
+
+
+            .student-user {
+
+                color:
+                    var(--sunshine-navy);
+            }
+
+
+            .exam-header-inner {
+
+                padding-top:
+                    12px;
+
+                padding-bottom:
+                    12px;
+            }
+
+
+            .exam-title {
+
+                font-size:
+                    23px;
+            }
+
+
+            .exam-divider {
+
+                height:
+                    25px;
+
+                margin:
+                    0 12px;
+            }
+
+
+            .exam-subtitle {
+
+                font-size:
+                    13px;
+            }
+
+
+            .timer-box {
+
+                min-width:
+                    auto;
+
+                height:
+                    48px;
+
+                padding:
+                    5px 9px;
+
+                gap:
+                    6px;
+            }
+
+
+            .timer-icon {
+
+                font-size:
+                    21px;
+            }
+
+
+            .timer-label {
+
+                display:
+                    none;
+            }
+
+
+            .timer-value {
+
+                font-size:
+                    17px;
+            }
+
+
+            .reading-pane {
+
+                height:
+                    540px;
+            }
+
+
+            .question-pane {
+
+                min-height:
+                    620px;
+            }
+
+
+            .passage-toolbar {
+
+                height:
+                    62px;
+
+                padding:
+                    7px 10px;
+
+                gap:
+                    4px;
+
+                overflow-x:
+                    auto;
+            }
+
+
+            .tool-tab {
+
+                padding:
+                    0 11px;
+
+                font-size:
+                    12px;
+            }
+
+
+            .tool-action {
+
+                min-width:
+                    70px;
+
+                font-size:
+                    12px;
+            }
+
+
+            .passage-scroll {
+
+                height:
+                    calc(100% - 62px);
+
+                padding:
+                    18px 18px 25px;
+            }
+
+
+            .passage-title {
+
+                font-size:
+                    25px;
+            }
+
+
+            .paragraph {
+
+                grid-template-columns:
+                    34px minmax(0, 1fr);
+
+                gap:
+                    11px;
+
+                margin-bottom:
+                    17px;
+            }
+
+
+            .paragraph-label {
+
+                width:
+                    34px;
+
+                height:
+                    34px;
+
+                font-size:
+                    14px;
+            }
+
+
+            .paragraph-text {
+
+                font-size:
+                    14px;
+
+                line-height:
+                    1.5;
+            }
+
+
+            .question-top {
+
+                height:
+                    61px;
+
+                padding:
+                    0 15px;
+            }
+
+
+            .question-count {
+
+                font-size:
+                    16px;
+            }
+
+
+            .question-filter {
+
+                padding:
+                    8px 9px;
+
+                font-size:
+                    11px;
+            }
+
+
+            .question-navigation {
+
+                padding:
+                    8px 10px;
+            }
+
+
+            .question-number,
+            .question-arrow {
+
+                width:
+                    35px;
+
+                height:
+                    35px;
+
+                flex-basis:
+                    35px;
+            }
+
+
+            .question-scroll {
+
+                height:
+                    auto;
+
+                max-height:
+                    510px;
+
+                padding:
+                    10px 12px 20px;
+            }
+
+
+            .question-card-header {
+
+                padding:
+                    0 14px;
+            }
+
+
+            .question-heading {
+
+                font-size:
+                    18px;
+            }
+
+
+            .flag-button {
+
+                font-size:
+                    11px;
+            }
+
+
+            .question-body {
+
+                padding:
+                    14px;
+            }
+
+
+            .question-text {
+
+                font-size:
+                    15px;
+            }
+
+
+            .answer-text {
+
+                font-size:
+                    13px;
+            }
+
+
+            .question-footer {
+
+                height:
+                    auto;
+
+                padding:
+                    12px;
+
+                flex-wrap:
+                    wrap;
+            }
+
+
+            .btn-question {
+
+                min-height:
+                    46px;
+
+                font-size:
+                    13px;
+            }
+
+
+            .bottom-bar-inner {
+
+                gap:
+                    12px;
+            }
+
+
+            .progress-area {
+
+                order:
+                    3;
+
+                width:
+                    100%;
+            }
+
+
+            .progress {
+
+                flex:
+                    1;
+
+                width:
+                    auto;
+            }
+
+
+            .review-button,
+            .save-button {
+
+                flex:
+                    1;
+
+                min-height:
+                    46px;
+
+                padding:
+                    0 10px;
+
+                font-size:
+                    12px;
+            }
+        }
+
+
+        /* =====================================================
+           VERY SMALL MOBILE
+        ====================================================== */
+
+        @media (max-width: 480px) {
+
+            .exam-subtitle {
+
+                display:
+                    none;
+            }
+
+
+            .exam-divider {
+
+                display:
+                    none;
+            }
+
+
+            .exam-title {
+
+                font-size:
+                    21px;
+            }
+
+
+            .timer-box {
+
+                margin-left:
+                    auto;
+            }
+
+
+            .question-footer {
+
+                display:
+                    grid;
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .btn-next,
+            .btn-previous {
+
+                width:
+                    100%;
+            }
+        }
+
+
+        /* =====================================================
+           ACCESSIBILITY
+        ====================================================== */
+
+        .question-number:focus-visible,
+        .answer-option:focus-visible,
+        .tool-tab:focus-visible,
+        .tool-action:focus-visible,
+        .question-arrow:focus-visible,
+        .flag-button:focus-visible,
+        .btn-question:focus-visible,
+        .review-button:focus-visible,
+        .save-button:focus-visible {
+
+            outline:
+                3px solid rgba(0, 107, 120, .25);
+
+            outline-offset:
+                2px;
+        }
+
+
+        /* =====================================================
+           REDUCED MOTION
+        ====================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            * {
+
+                scroll-behavior:
+                    auto !important;
+
+                transition:
+                    none !important;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     GLOBAL NAVIGATION
+========================================================== -->
+
+<header class="site-header">
+
+    <nav class="navbar navbar-expand-lg main-navbar">
+
+        <div class="container">
+
+            <!-- BRAND -->
+
+            <a class="navbar-brand" href="index.html">
+
+                <div class="brand-icon">
+                    <i class="bi bi-sun"></i>
+                </div>
+
+                <div>
+                    <div class="brand-title">
+                        Sunshine IELTS Prep
+                    </div>
+
+                    <div class="brand-subtitle">
+                        LEARN · BELIEVE · ACHIEVE
+                    </div>
+                </div>
+
+            </a>
+
+
+            <!-- MOBILE TOGGLE -->
+
+            <button
+            class="navbar-toggler border-0 shadow-none"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavigation"
+            aria-controls="mainNavigation"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+                <i class="bi bi-list fs-2 text-sunshine-navy"></i>
+
+            </button>
+
+
+            <!-- NAVIGATION -->
+
+            <div
+            class="collapse navbar-collapse "
+            id="mainNavigation">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center n-navi">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+
+                            IELTS Reading
+                        </a>
+
+                        <ul class="dropdown-menu border-0 shadow-sm">
+
+                            <li>
+                                <a class="dropdown-item" href="sunshinemcqreading.html">
+                                    Academic Reading
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="sunshine-reading-master-matching-headings-bootstrap-5-3-8.html">
+                                    General Reading
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                <!-- <li>
+                    <a class="dropdown-item" href="#">
+                        IELTS Writing
+                    </a>
+                </li>
+
+                <li>
+                    <a class="dropdown-item" href="#">
+                        IELTS Reading
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        PTE
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        OET
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Computer Courses
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Study Abroad
+                    </a>
+                </li>
+                
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#practice">
+                        Practice Tests
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#resources">
+                        Resources
+                    </a>
+                </li> -->
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+
+
+                <!-- NAV ACTIONS -->
+
+                <div class="student-user ms-lg-3">
+                    <span class="student-avatar"><i class="bi bi-person-circle avatar"></i></span>
+                    <p class="intro">Hi, Student</p>
+                    <i class="bi bi-chevron-down small intro-sign"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================================================
+     EXAM HEADER
+========================================================== -->
+
+<section class="exam-header">
+
+    <div
+        class="container-fluid px-3 px-xl-5 exam-header-inner"
+    >
+
+        <div
+            class="d-flex align-items-center justify-content-between h-100"
+        >
+
+
+            <!-- TITLE -->
+
+            <div
+                class="d-flex align-items-center min-w-0"
+            >
+
+                <h1 class="exam-title">
+                    Sunshine Reading
+                </h1>
+
+
+                <span
+                    class="exam-divider"
+                    aria-hidden="true"
+                ></span>
+
+
+                <span class="exam-subtitle">
+                    Academic Reading Practice
+                </span>
+
+            </div>
+
+
+            <!-- TIMER -->
+
+            <div
+                class="timer-box"
+                aria-label="Time remaining"
+            >
+
+                <i
+                    class="bi bi-stopwatch timer-icon"
+                    aria-hidden="true"
+                ></i>
+
+
+                <div>
+
+                    <div class="timer-label">
+                        Time Remaining
+                    </div>
+
+                    <div
+                        class="timer-value"
+                        id="timer"
+                    >
+                        58:42
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     READING APPLICATION
+========================================================== -->
+
+<main class="reading-app">
+
+
+    <!-- =====================================================
+         LEFT: READING PASSAGE
+    ====================================================== -->
+
+    <section
+        class="reading-pane"
+        aria-labelledby="passageTitle"
+    >
+
+
+        <!-- TOOLBAR -->
+
+        <div class="passage-toolbar">
+
+
+            <button
+                type="button"
+                class="tool-tab active"
+                id="passageTab"
+            >
+
+                <i class="bi bi-file-earmark-text"></i>
+
+                Reading Passage
+
+            </button>
+
+
+            <button
+                type="button"
+                class="tool-tab"
+                id="informationTab"
+            >
+
+                <i class="bi bi-info-circle"></i>
+
+                Information
+
+            </button>
+
+
+            <div class="toolbar-spacer"></div>
+
+
+            <button
+                type="button"
+                class="tool-action"
+                id="highlightButton"
+                aria-label="Highlight text"
+            >
+
+                <i class="bi bi-highlighter"></i>
+
+                Highlight
+
+                <i class="bi bi-chevron-down"></i>
+
+            </button>
+
+
+            <button
+                type="button"
+                class="tool-action"
+                id="notesButton"
+            >
+
+                <i class="bi bi-journal-text"></i>
+
+                Notes
+
+            </button>
+
+
+            <button
+                type="button"
+                class="tool-action fullscreen-btn"
+                id="passageFullscreen"
+                aria-label="Full screen reading passage"
+            >
+
+                <i class="bi bi-arrows-fullscreen"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- PASSAGE -->
+
+        <article
+            class="passage-scroll"
+            id="passageScroll"
+        >
+
+            <h2
+                class="passage-title"
+                id="passageTitle"
+            >
+                The Future of Urban Forests
+            </h2>
+
+
+            <!-- PARAGRAPH A -->
+
+            <div class="paragraph">
+
+                <div class="paragraph-label">
+                    A
+                </div>
+
+                <p class="paragraph-text">
+
+                    Cities around the world are experiencing rapid
+                    growth, and as urban populations increase, the
+                    pressure on natural environments becomes more
+                    intense. In response, many city planners and
+                    policymakers are turning to urban forests – trees
+                    and green spaces within cities – as a practical
+                    solution to a range of environmental, social and
+                    economic challenges.
+
+                </p>
+
+            </div>
+
+
+            <!-- PARAGRAPH B -->
+
+            <div class="paragraph">
+
+                <div class="paragraph-label">
+                    B
+                </div>
+
+                <p class="paragraph-text">
+
+                    Urban forests can take many forms, from
+                    tree-lined streets and pocket parks to large
+                    urban woodlands. These green spaces are more than
+                    just attractive features. They play an essential
+                    role in improving air quality by absorbing carbon
+                    dioxide and filtering pollutants. Trees also help
+                    to regulate temperatures, reducing the urban
+                    heat island effect, which can make cities
+                    significantly hotter than surrounding rural areas.
+
+                </p>
+
+            </div>
+
+
+            <!-- PARAGRAPH C -->
+
+            <div class="paragraph">
+
+                <div class="paragraph-label">
+                    C
+                </div>
+
+                <p class="paragraph-text">
+
+                    In addition to environmental benefits, urban
+                    forests contribute to the well-being of city
+                    residents. Research has shown that access to green
+                    spaces can reduce stress, improve mental health
+                    and encourage physical activity. Parks and
+                    tree-lined areas provide places for people to
+                    relax, socialise and connect with nature, even in
+                    the heart of a busy city.
+
+                </p>
+
+            </div>
+
+
+            <!-- PARAGRAPH D -->
+
+            <div class="paragraph">
+
+                <div class="paragraph-label">
+                    D
+                </div>
+
+                <p class="paragraph-text">
+
+                    Despite these advantages, creating and maintaining
+                    urban forests is not without challenges. Land in
+                    cities is often limited and expensive, and there
+                    can be competing demands for space, such as
+                    housing, transport and commercial development.
+                    Furthermore, trees require long-term care,
+                    including watering, pruning and protection from
+                    pests and diseases. Without proper planning and
+                    investment, urban forests may struggle to survive.
+
+                </p>
+
+            </div>
+
+
+            <!-- PARAGRAPH E -->
+
+            <div class="paragraph">
+
+                <div class="paragraph-label">
+                    E
+                </div>
+
+                <p class="paragraph-text">
+
+                    Many cities are now adopting innovative strategies
+                    to expand their urban forests. Some are introducing
+                    “green roofs” on buildings, while others are
+                    transforming unused land into community gardens
+                    or mini-forests. Technology is also playing a
+                    role, with data and digital tools helping planners
+                    monitor tree health and identify areas where new
+                    green spaces could have the greatest impact.
+
+                </p>
+
+            </div>
+
+
+            <!-- PARAGRAPH F -->
+
+            <div class="paragraph">
+
+                <div class="paragraph-label">
+                    F
+                </div>
+
+                <p class="paragraph-text">
+
+                    The future of urban forests will depend on
+                    continued cooperation between governments,
+                    communities and environmental organisations.
+                    Successful projects require not only funding but
+                    also long-term commitment. As cities continue to
+                    grow, integrating nature into urban planning may
+                    become increasingly important for creating
+                    healthier and more sustainable places to live.
+
+                </p>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         RIGHT: QUESTIONS
+    ====================================================== -->
+
+    <section
+        class="question-pane"
+        aria-labelledby="questionAreaTitle"
+    >
+
+
+        <!-- QUESTION HEADER -->
+
+        <div class="question-top">
+
+            <h2
+                class="question-count"
+                id="questionAreaTitle"
+            >
+                Questions 1 – 13 of 40
+            </h2>
+
+
+            <button
+                type="button"
+                class="question-filter"
+            >
+
+                <i class="bi bi-list-ul me-1"></i>
+
+                All Questions
+
+                <i class="bi bi-chevron-down ms-1"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- QUESTION NUMBERS -->
+
+        <div class="question-navigation">
+
+            <div class="question-nav-scroll">
+
+                <button
+                    type="button"
+                    class="question-arrow"
+                    id="previousQuestionTop"
+                    aria-label="Previous question"
+                >
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="question-number active"
+                    data-question="1"
+                >
+                    1
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="2"
+                >
+                    2
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="3"
+                >
+                    3
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="4"
+                >
+                    4
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="5"
+                >
+                    5
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="6"
+                >
+                    6
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="7"
+                >
+                    7
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="8"
+                >
+                    8
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="9"
+                >
+                    9
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="10"
+                >
+                    10
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="11"
+                >
+                    11
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="12"
+                >
+                    12
+                </button>
+
+                <button
+                    type="button"
+                    class="question-number"
+                    data-question="13"
+                >
+                    13
+                </button>
+
+
+                <button
+                    type="button"
+                    class="question-arrow"
+                    id="nextQuestionTop"
+                    aria-label="Next question"
+                >
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION SCROLL -->
+
+        <div class="question-scroll">
+
+
+            <article class="question-card">
+
+
+                <!-- QUESTION TITLE -->
+
+                <header class="question-card-header">
+
+                    <h3 class="question-heading">
+                        Question 1
+                    </h3>
+
+
+                    <button
+                        type="button"
+                        class="flag-button"
+                        id="flagQuestion"
+                        aria-pressed="false"
+                    >
+
+                        <i class="bi bi-bookmark"></i>
+
+                        <span>
+                            Flag for review
+                        </span>
+
+                    </button>
+
+                </header>
+
+
+                <!-- QUESTION BODY -->
+
+                <div class="question-body">
+
+                    <p class="instruction">
+                        Choose the correct answer, A, B, C or D.
+                    </p>
+
+
+                    <p class="question-text">
+                        What is the main purpose of paragraph A?
+                    </p>
+
+
+                    <!-- ANSWER A -->
+
+                    <label
+                        class="answer-option selected"
+                        tabindex="0"
+                    >
+
+                        <input
+                            type="radio"
+                            name="question1"
+                            value="A"
+                            class="visually-hidden"
+                            checked
+                        >
+
+                        <span class="answer-radio"></span>
+
+                        <span class="answer-letter">
+                            A.
+                        </span>
+
+                        <span class="answer-text">
+                            To introduce the idea of urban forests
+                            and explain why they are becoming
+                            important.
+                        </span>
+
+                    </label>
+
+
+                    <!-- ANSWER B -->
+
+                    <label
+                        class="answer-option"
+                        tabindex="0"
+                    >
+
+                        <input
+                            type="radio"
+                            name="question1"
+                            value="B"
+                            class="visually-hidden"
+                        >
+
+                        <span class="answer-radio"></span>
+
+                        <span class="answer-letter">
+                            B.
+                        </span>
+
+                        <span class="answer-text">
+                            To describe the different types of trees
+                            found in cities.
+                        </span>
+
+                    </label>
+
+
+                    <!-- ANSWER C -->
+
+                    <label
+                        class="answer-option"
+                        tabindex="0"
+                    >
+
+                        <input
+                            type="radio"
+                            name="question1"
+                            value="C"
+                            class="visually-hidden"
+                        >
+
+                        <span class="answer-radio"></span>
+
+                        <span class="answer-letter">
+                            C.
+                        </span>
+
+                        <span class="answer-text">
+                            To explain the challenges of maintaining
+                            urban forests.
+                        </span>
+
+                    </label>
+
+
+                    <!-- ANSWER D -->
+
+                    <label
+                        class="answer-option"
+                        tabindex="0"
+                    >
+
+                        <input
+                            type="radio"
+                            name="question1"
+                            value="D"
+                            class="visually-hidden"
+                        >
+
+                        <span class="answer-radio"></span>
+
+                        <span class="answer-letter">
+                            D.
+                        </span>
+
+                        <span class="answer-text">
+                            To present research on the health benefits
+                            of green spaces.
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- QUESTION FOOTER -->
+
+        <div class="question-footer">
+
+            <button
+                type="button"
+                class="btn btn-question btn-previous"
+                id="previousQuestion"
+            >
+
+                <i class="bi bi-arrow-left"></i>
+
+                Previous
+
+            </button>
+
+
+            <button
+                type="button"
+                class="btn btn-question btn-next"
+                id="nextQuestion"
+            >
+
+                Next Question
+
+                <i class="bi bi-arrow-right"></i>
+
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     BOTTOM APPLICATION BAR
+========================================================== -->
+
+<footer class="bottom-bar">
+
+    <div
+        class="container-fluid px-3 px-xl-4 bottom-bar-inner"
+    >
+
+        <div
+            class="row h-100 align-items-center g-3"
+        >
+
+
+            <!-- REVIEW -->
+
+            <div class="col-6 col-lg-3">
+
+                <button
+                    type="button"
+                    class="btn review-button"
+                    id="reviewLater"
+                >
+
+                    <i class="bi bi-journal-check me-2"></i>
+
+                    Review Later
+
+                    <span id="reviewCount">
+                        (0)
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- PROGRESS -->
+
+            <div class="col-12 col-lg-6 order-3 order-lg-0">
+
+                <div class="progress-area">
+
+                    <span class="progress-label">
+                        Progress
+                    </span>
+
+
+                    <div
+                        class="progress"
+                        role="progressbar"
+                        aria-label="Test progress"
+                        aria-valuenow="1"
+                        aria-valuemin="0"
+                        aria-valuemax="40"
+                    >
+
+                        <div
+                            class="progress-bar"
+                            id="progressBar"
+                            style="width: 2.5%"
+                        ></div>
+
+                    </div>
+
+
+                    <span class="progress-number">
+                        <span id="currentProgress">
+                            1
+                        </span>/40
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- SAVE -->
+
+            <div class="col-6 col-lg-3 text-lg-end">
+
+                <button
+                    type="button"
+                    class="btn save-button"
+                    id="saveContinue"
+                >
+
+                    Save & Continue
+
+                    <i class="bi bi-arrow-right ms-1"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =========================================================
+     BOOTSTRAP JAVASCRIPT 5.3.8
+========================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous">
+</script>
+
+
+<script>
+
+    /* =========================================================
+       SUNSHINE READING APPLICATION
+    ========================================================== */
+
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+
+            /* =================================================
+               TIMER
+            ================================================== */
+
+            let remainingSeconds =
+                (58 * 60) + 42;
+
+            const timerElement =
+                document.getElementById("timer");
+
+
+            function updateTimer() {
+
+                const minutes =
+                    Math.floor(
+                        remainingSeconds / 60
+                    );
+
+                const seconds =
+                    remainingSeconds % 60;
+
+
+                timerElement.textContent =
+                    String(minutes).padStart(2, "0")
+                    + ":"
+                    + String(seconds).padStart(2, "0");
+
+
+                if (remainingSeconds > 0) {
+
+                    remainingSeconds--;
+
+                }
+
+            }
+
+
+            updateTimer();
+
+            const timerInterval =
+                setInterval(
+                    updateTimer,
+                    1000
+                );
+
+
+            /* =================================================
+               ANSWER SELECTION
+            ================================================== */
+
+            const answerOptions =
+                document.querySelectorAll(
+                    ".answer-option"
+                );
+
+
+            answerOptions.forEach(
+                function (option) {
+
+                    const radio =
+                        option.querySelector(
+                            'input[type="radio"]'
+                        );
+
+
+                    function selectAnswer() {
+
+                        answerOptions.forEach(
+                            function (item) {
+
+                                item.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+
+                        option.classList.add(
+                            "selected"
+                        );
+
+
+                        radio.checked =
+                            true;
+                    }
+
+
+                    option.addEventListener(
+                        "click",
+                        selectAnswer
+                    );
+
+
+                    option.addEventListener(
+                        "keydown",
+                        function (event) {
+
+                            if (
+                                event.key === "Enter"
+                                ||
+                                event.key === " "
+                            ) {
+
+                                event.preventDefault();
+
+                                selectAnswer();
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /* =================================================
+               QUESTION NAVIGATION
+            ================================================== */
+
+            const questionButtons =
+                document.querySelectorAll(
+                    ".question-number"
+                );
+
+            let currentQuestion =
+                1;
+
+
+            const currentProgress =
+                document.getElementById(
+                    "currentProgress"
+                );
+
+            const progressBar =
+                document.getElementById(
+                    "progressBar"
+                );
+
+
+            function activateQuestion(
+                questionNumber
+            ) {
+
+                currentQuestion =
+                    questionNumber;
+
+
+                questionButtons.forEach(
+                    function (button) {
+
+                        button.classList.toggle(
+                            "active",
+                            Number(
+                                button.dataset.question
+                            ) === questionNumber
+                        );
+
+                    }
+                );
+
+
+                currentProgress.textContent =
+                    questionNumber;
+
+
+                const percentage =
+                    (questionNumber / 40) * 100;
+
+
+                progressBar.style.width =
+                    percentage + "%";
+
+
+                document
+                    .querySelector(
+                        ".progress"
+                    )
+                    .setAttribute(
+                        "aria-valuenow",
+                        questionNumber
+                    );
+
+            }
+
+
+            questionButtons.forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            activateQuestion(
+                                Number(
+                                    button.dataset.question
+                                )
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /* =================================================
+               PREVIOUS
+            ================================================== */
+
+            function previousQuestion() {
+
+                if (
+                    currentQuestion > 1
+                ) {
+
+                    activateQuestion(
+                        currentQuestion - 1
+                    );
+
+                }
+
+            }
+
+
+            document
+                .getElementById(
+                    "previousQuestion"
+                )
+                .addEventListener(
+                    "click",
+                    previousQuestion
+                );
+
+
+            document
+                .getElementById(
+                    "previousQuestionTop"
+                )
+                .addEventListener(
+                    "click",
+                    previousQuestion
+                );
+
+
+            /* =================================================
+               NEXT
+            ================================================== */
+
+            function nextQuestion() {
+
+                if (
+                    currentQuestion < 40
+                ) {
+
+                    activateQuestion(
+                        currentQuestion + 1
+                    );
+
+                }
+
+            }
+
+
+            document
+                .getElementById(
+                    "nextQuestion"
+                )
+                .addEventListener(
+                    "click",
+                    nextQuestion
+                );
+
+
+            document
+                .getElementById(
+                    "nextQuestionTop"
+                )
+                .addEventListener(
+                    "click",
+                    nextQuestion
+                );
+
+
+            /* =================================================
+               FLAG
+            ================================================== */
+
+            const flagButton =
+                document.getElementById(
+                    "flagQuestion"
+                );
+
+
+            flagButton.addEventListener(
+                "click",
+                function () {
+
+                    const isFlagged =
+                        flagButton.getAttribute(
+                            "aria-pressed"
+                        ) === "true";
+
+
+                    flagButton.setAttribute(
+                        "aria-pressed",
+                        String(!isFlagged)
+                    );
+
+
+                    const icon =
+                        flagButton.querySelector(
+                            "i"
+                        );
+
+
+                    if (!isFlagged) {
+
+                        icon.className =
+                            "bi bi-bookmark-fill";
+
+                    } else {
+
+                        icon.className =
+                            "bi bi-bookmark";
+
+                    }
+
+                }
+            );
+
+
+            /* =================================================
+               REVIEW LATER
+            ================================================== */
+
+            let reviewCount =
+                0;
+
+
+            const reviewButton =
+                document.getElementById(
+                    "reviewLater"
+                );
+
+
+            const reviewCountElement =
+                document.getElementById(
+                    "reviewCount"
+                );
+
+
+            reviewButton.addEventListener(
+                "click",
+                function () {
+
+                    reviewCount++;
+
+                    reviewCountElement.textContent =
+                        "(" + reviewCount + ")";
+
+                }
+            );
+
+
+            /* =================================================
+               HIGHLIGHT
+            ================================================== */
+
+            const highlightButton =
+                document.getElementById(
+                    "highlightButton"
+                );
+
+
+            highlightButton.addEventListener(
+                "click",
+                function () {
+
+                    const selection =
+                        window.getSelection();
+
+
+                    if (
+                        selection
+                        &&
+                        selection.toString().trim()
+                    ) {
+
+                        const range =
+                            selection.getRangeAt(0);
+
+
+                        const mark =
+                            document.createElement(
+                                "mark"
+                            );
+
+
+                        mark.className =
+                            "passage-highlight";
+
+
+                        try {
+
+                            range.surroundContents(
+                                mark
+                            );
+
+                            selection.removeAllRanges();
+
+                        } catch (error) {
+
+                            console.warn(
+                                "Highlight could not be applied to this selection."
+                            );
+
+                        }
+
+                    }
+
+                }
+            );
+
+
+            /* =================================================
+               INFORMATION TAB
+            ================================================== */
+
+            document
+                .getElementById(
+                    "informationTab"
+                )
+                .addEventListener(
+                    "click",
+                    function () {
+
+                        alert(
+                            "Academic Reading Practice\n\nRead the passage carefully and answer each question before moving forward."
+                        );
+
+                    }
+                );
+
+
+            /* =================================================
+               NOTES
+            ================================================== */
+
+            document
+                .getElementById(
+                    "notesButton"
+                )
+                .addEventListener(
+                    "click",
+                    function () {
+
+                        const note =
+                            window.prompt(
+                                "Add a note for this passage:"
+                            );
+
+
+                        if (
+                            note
+                            &&
+                            note.trim()
+                        ) {
+
+                            localStorage.setItem(
+                                "sunshineReadingNote",
+                                note.trim()
+                            );
+
+                            alert(
+                                "Your note has been saved."
+                            );
+
+                        }
+
+                    }
+                );
+
+
+            /* =================================================
+               FULLSCREEN PASSAGE
+            ================================================== */
+
+            document
+                .getElementById(
+                    "passageFullscreen"
+                )
+                .addEventListener(
+                    "click",
+                    async function () {
+
+                        const passagePane =
+                            document.querySelector(
+                                ".reading-pane"
+                            );
+
+
+                        if (
+                            !document.fullscreenElement
+                        ) {
+
+                            try {
+
+                                await passagePane.requestFullscreen();
+
+                            } catch (error) {
+
+                                console.warn(
+                                    "Fullscreen is not available."
+                                );
+
+                            }
+
+                        } else {
+
+                            await document.exitFullscreen();
+
+                        }
+
+                    }
+                );
+
+
+            /* =================================================
+               SAVE & CONTINUE
+            ================================================== */
+
+            document
+                .getElementById(
+                    "saveContinue"
+                )
+                .addEventListener(
+                    "click",
+                    function () {
+
+                        const selectedAnswer =
+                            document.querySelector(
+                                'input[name="question1"]:checked'
+                            );
+
+
+                        const state = {
+
+                            question:
+                                currentQuestion,
+
+                            answer:
+                                selectedAnswer
+                                    ? selectedAnswer.value
+                                    : null,
+
+                            reviewCount:
+                                reviewCount,
+
+                            savedAt:
+                                new Date().toISOString()
+
+                        };
+
+
+                        localStorage.setItem(
+                            "sunshineReadingProgress",
+                            JSON.stringify(state)
+                        );
+
+
+                        alert(
+                            "Your progress has been saved."
+                        );
+
+                    }
+                );
+
+
+            /* =================================================
+               LOAD SAVED PROGRESS
+            ================================================== */
+
+            const saved =
+                localStorage.getItem(
+                    "sunshineReadingProgress"
+                );
+
+
+            if (saved) {
+
+                try {
+
+                    const state =
+                        JSON.parse(saved);
+
+
+                    if (
+                        state.question
+                        &&
+                        state.question > 1
+                    ) {
+
+                        activateQuestion(
+                            Number(
+                                state.question
+                            )
+                        );
+
+                    }
+
+                } catch (error) {
+
+                    console.warn(
+                        "Saved progress could not be loaded."
+                    );
+
+                }
+
+            }
+
+
+        }
+
+    );
+
+</script>
+
+
+</body>
+
+</html>
