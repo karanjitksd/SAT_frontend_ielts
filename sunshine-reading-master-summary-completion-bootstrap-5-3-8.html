@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sunshine Reading — reusable IELTS Reading practice interface.">
+  <title>Sunshine Reading | Summary Completion Master</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="s.css">
+
+  <!-- Bootstrap 5.3.8: pinned production version -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+  <style>
+    :root{
+      --sun-navy:#073451;--sun-teal:#006b78;--sun-teal-dark:#00545f;
+      --sun-gold:#e7aa2e;--sun-gold-soft:#fff2d3;--sun-cream:#fffaf0;
+      --sun-white:#fff;--sun-border:#dfe5e6;--sun-text:#173b57;--sun-muted:#667a8a;
+      --sun-shadow:0 8px 28px rgba(7,52,81,.08);
+      --header-h:78px;--exam-h:82px;--bottom-h:86px;
+    }
+
+    *{box-sizing:border-box;}
+    html,body{width:100%;height:100%;}
+    body{margin:0;background:var(--sun-cream);color:var(--sun-text);font-family:"DM Sans",sans-serif;overflow:hidden;}
+    h1,h2,h3,h4,h5,h6{font-family:"Poppins",sans-serif;}
+    button,input,select{font:inherit;}
+    button:focus-visible,select:focus-visible,.answer-row:focus-within{outline:3px solid rgba(0,107,120,.22);outline-offset:2px;}
+
+    /* ---------- SITE HEADER ---------- */
+    .site-header{height:var(--header-h);background:#fff;border-bottom:1px solid rgba(7,52,81,.07);position:sticky;z-index:1000;}
+    .site-navbar{height:var(--header-h);}
+    .navbar{background: rgba(255, 255, 255, 0.97); border-bottom: 1px solid var(--sunshine-border);padding: 2px 0;position: sticky;top: 0;z-index: 1030;}
+    .brand-logo{width:215px;height:auto;display:block;}
+    .main-nav .nav-link{color:var(--sun-navy);font-size:14px;font-weight:600;padding:.65rem .7rem!important;white-space:nowrap;}
+    .main-nav .nav-link:hover,.main-nav .nav-link:focus{color:#c9870c;}
+    .main-nav .dropdown-menu{border:1px solid rgba(7,52,81,.08);border-radius:12px;padding:.45rem;box-shadow:0 16px 45px rgba(7,52,81,.11);}
+    .main-nav .dropdown-item{color:var(--sun-navy);font-size:13px;font-weight:600;border-radius:8px;padding:.55rem .75rem;}
+    .main-nav .dropdown-item:hover{background:var(--sun-gold-soft);color:var(--sun-navy);}
+    .student-user{display:flex;align-items:center;gap:9px;color:#fff;font-size:14px;font-weight:600;}
+    .student-avatar{width:45px;height:45px;border-radius:50%;background:#fff;color:var(--sun-teal);display:inline-flex;align-items:center;justify-content:center;font-size:20px;}
+    .avatar{font-size: 35px;}
+    .intro{color:#003f48; }
+    .intro-sign{background:#fff;display:inline-flex;font-size:15px;}
+
+    /* ---------- EXAM HEADER ---------- */
+    .exam-header{height:var(--exam-h);background:linear-gradient(90deg,#006b78,#005966 55%,#004b57);color:#fff;position:relative;overflow:hidden;}
+    .exam-header:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 74% 30%,rgba(231,170,46,.2),transparent 22%),radial-gradient(circle at 94% 45%,rgba(255,255,255,.08),transparent 24%);}
+    .exam-header-inner{height:100%;position:relative;z-index:1;}
+    .exam-title{font-size:38px;font-weight:800;letter-spacing:-.025em;margin:0;}
+    .exam-divider{width:2px;height:34px;background:rgba(255,255,255,.75);margin:0 25px;}
+    .exam-subtitle{font-size:18px;color:rgba(255,255,255,.92);}
+    .timer-box{min-width:205px;height:64px;border:1px solid rgba(231,170,46,.9);border-radius:11px;background:rgba(0,65,75,.35);display:flex;align-items:center;gap:12px;padding:8px 17px;}
+    .timer-icon{font-size:30px;color:#f3c04a;}
+    .timer-label{font-size:11px;color:rgba(255,255,255,.88);line-height:1.1;margin-bottom:3px;}
+    .timer-value{font-family:"Poppins";font-size:22px;font-weight:800;line-height:1;}
+
+    /* ---------- APP SHELL ---------- */
+    .reading-app{height:calc(100vh - var(--header-h) - var(--exam-h) - var(--bottom-h));min-height:520px;display:flex;background:var(--sun-cream);}
+    .reading-pane,.question-pane{height:100%;min-width:0;position:relative;overflow:hidden;background:#fff;}
+    .reading-pane{flex:0 0 55%;max-width:55%;border-right:1px solid var(--sun-border);}
+    .question-pane{flex:0 0 45%;max-width:45%;}
+
+    /* ---------- PASSAGE TOOLBAR ---------- */
+    .passage-toolbar{height:68px;background:#fffdf8;border-bottom:1px solid var(--sun-border);display:flex;align-items:stretch;gap:8px;padding:10px 36px;}
+    .tool-tab,.tool-action{border:0;color:var(--sun-navy);font-size:14px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;}
+    .tool-tab{background:transparent;padding:0 20px;border-radius:9px;}
+    .tool-tab.active{background:var(--sun-gold-soft);box-shadow:inset 0 -2px 0 var(--sun-gold);}
+    .tool-tab:hover,.tool-action:hover{background:#faf5e8;}
+    .toolbar-spacer{flex:1;}
+    .tool-action{background:#f8f9f8;min-width:100px;border-radius:9px;}
+    .fullscreen-btn{min-width:43px;width:43px;background:#fff;border:1px solid var(--sun-border);}
+
+    /* ---------- PASSAGE ---------- */
+    .passage-scroll{height:calc(100% - 68px);overflow-y:auto;padding:20px 35px 30px 38px;scrollbar-width:thin;scrollbar-color:#aeb7ba #f3f4f2;}
+    .passage-scroll::-webkit-scrollbar{width:10px;}
+    .passage-scroll::-webkit-scrollbar-track{background:#f3f4f2;}
+    .passage-scroll::-webkit-scrollbar-thumb{background:#aeb7ba;border-radius:20px;}
+    .passage-title{font-size:30px;font-weight:800;letter-spacing:-.025em;margin:0 0 17px;color:var(--sun-navy);}
+    .paragraph{display:grid;grid-template-columns:42px minmax(0,1fr);gap:18px;margin-bottom:21px;}
+    .paragraph-label{width:40px;height:40px;border-radius:7px;background:#e7f5f4;color:var(--sun-teal);display:flex;align-items:center;justify-content:center;font-family:"Poppins";font-weight:700;}
+    .paragraph-text{margin:0;color:#334f66;font-size:16px;line-height:1.47;}
+    mark.passage-highlight{background:#fff0b7;border-radius:3px;padding:1px 2px;}
+
+    /* ---------- QUESTION HEADER/NAV ---------- */
+    .question-top{height:68px;border-bottom:1px solid var(--sun-border);background:#fffdf9;display:flex;align-items:center;justify-content:space-between;padding:0 34px}
+    .question-count{margin:0;font-size:19px;font-weight:800;color:var(--sun-navy)}
+    .question-filter{border:1px solid var(--sun-border);background:#fff;border-radius:9px;padding:9px 14px;color:var(--sun-navy);font-size:13px;font-weight:600}
+    .question-navigation{padding:9px 25px 11px;border-bottom:1px solid #edf0ef;background:#fff}
+    .question-nav-scroll{display:flex;gap:7px;align-items:center;overflow-x:auto;scrollbar-width:none}
+    .question-nav-scroll::-webkit-scrollbar{display:none}
+    .question-number,.question-arrow{width:39px;height:39px;flex:0 0 39px;border:1px solid var(--sun-border);border-radius:8px;background:#fff;color:var(--sun-navy);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+    .question-number:hover{border-color:var(--sun-gold);background:var(--sun-gold-soft)}
+    .question-number.active{background:var(--sun-gold);border-color:var(--sun-gold);color:#111}
+    .question-number.answered:not(.active){border-color:#8abdb6;background:#f0fbf8;color:var(--sun-teal)}
+
+    /* ---------- QUESTION WORKSPACE ---------- */
+    .question-scroll{height:calc(100% - 139px);overflow-y:auto;padding:13px 34px 24px}
+    .question-card{border:1px solid #eee6d4;border-radius:12px;background:#fff;overflow:hidden;box-shadow:0 4px 18px rgba(7,52,81,.03)}
+    .question-card-header{min-height:59px;background:#fff8e8;display:flex;align-items:center;justify-content:space-between;padding:0 21px}
+    .question-heading{margin:0;color:var(--sun-navy);font-size:21px;font-weight:800}
+    .flag-button{border:0;background:transparent;color:var(--sun-navy);display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700}
+    .flag-button i{color:#c9870c;font-size:18px}
+    .question-body{padding:16px 21px 21px}
+    .instruction{color:#4d6273;font-size:14px;line-height:1.45;margin-bottom:20px}
+    .question-text{color:var(--sun-navy);font-size:17px;line-height:1.45;font-weight:600;margin:0 0 20px}
+
+    /* ---------- MATCHING HEADINGS MASTER ---------- */
+    .headings-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+    .answer-list{display:grid;gap:10px}
+    .answer-row{border:1px solid #dce3e5;border-radius:9px;background:#fff;padding:11px 12px;display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;align-items:center}
+    .answer-row:hover{border-color:#b9c9ce;background:#fcfdfc}
+    .answer-letter{width:34px;height:34px;border-radius:7px;background:#e7f5f4;color:var(--sun-teal);display:flex;align-items:center;justify-content:center;font-family:"Poppins";font-weight:700}
+    .answer-copy{min-width:0}
+    .answer-copy label{display:block;font-size:12px;color:var(--sun-muted);font-weight:600;margin-bottom:4px}
+    .heading-select{width:100%;min-height:40px;border:1px solid #d5dfe1;border-radius:8px;color:var(--sun-navy);font-size:13px;font-weight:600;background:#fff;padding:.45rem 2rem .45rem .7rem}
+    .heading-select:focus{border-color:var(--sun-teal);box-shadow:0 0 0 .15rem rgba(0,107,120,.12)}
+    .heading-list-card{border:1px solid #e1ebea;border-radius:10px;background:linear-gradient(145deg,#f5fbfa,#fff);overflow:hidden}
+    .heading-list-title{background:#eef8f7;color:var(--sun-navy);font-family:"Poppins";font-size:14px;font-weight:800;padding:11px 13px;border-bottom:1px solid #dce9e7}
+    .heading-list{list-style:none;margin:0;padding:7px}
+    .heading-list li{display:grid;grid-template-columns:29px minmax(0,1fr);gap:8px;align-items:start;padding:7px 6px;border-radius:7px;color:#395267;font-size:11px;line-height:1.3}
+    .heading-list li:hover{background:#fff}
+    .roman-badge{width:26px;height:26px;border-radius:6px;background:#e7f5f4;color:var(--sun-teal);display:flex;align-items:center;justify-content:center;font-family:"Poppins";font-size:10px;font-weight:800}
+    .heading-used{opacity:.45}
+    .heading-used .roman-badge{background:#e9edef;color:#65757e}
+
+    /* ---------- QUESTION FOOTER ---------- */
+    .question-footer{height:92px;display:flex;align-items:center;gap:13px;padding:13px 34px;border-top:1px solid var(--sun-border);background:#fff}
+    .btn-question{min-height:51px;border-radius:9px;font-family:"Poppins";font-size:14px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+    .btn-previous{flex:1;border:1px solid #cbd5d8;background:#fff;color:var(--sun-navy)}
+    .btn-next{flex:1;border:0;background:linear-gradient(135deg,#f1bb42,#e2a127);color:#111}
+    .btn-next:hover{background:linear-gradient(135deg,#e7aa2e,#d89518);color:#111}
+
+    /* ---------- BOTTOM BAR ---------- */
+    .bottom-bar{height:var(--bottom-h);background:rgba(255,255,255,.98);border-top:1px solid var(--sun-border);box-shadow:0 -5px 20px rgba(7,52,81,.04);position:relative;z-index:100}
+    .bottom-bar-inner{height:100%}
+    .review-button,.save-button{min-height:50px;border-radius:9px;font-family:"Poppins";font-size:14px;font-weight:700}
+    .review-button{border:1px solid #cbd5d8;background:#fff;color:var(--sun-navy)}
+    .save-button{border:0;background:var(--sun-teal-dark);color:#fff;padding:0 22px}
+    .save-button:hover{background:#003f48;color:#fff}
+    .progress-area{display:flex;align-items:center;justify-content:center;gap:14px}
+    .progress-label,.progress-number{font-size:13px;font-weight:700;color:var(--sun-navy);white-space:nowrap}
+    .progress{width:310px;height:10px;background:#e1e7e8;border-radius:50rem}
+    .progress-bar{background:var(--sun-teal);border-radius:inherit}
+
+
+    /* ---------- SUMMARY COMPLETION MASTER ---------- */
+    .summary-panel{border:1px solid #d9e9e7;border-radius:10px;background:linear-gradient(145deg,#f4fbfa,#fff);padding:16px 17px 18px}
+    .summary-title{font-family:"Poppins";font-size:18px;font-weight:800;color:var(--sun-navy);margin:0 0 17px}
+    .summary-copy{font-size:15px;line-height:2.35;color:#304f67;margin:0}
+    .summary-blank{display:inline-block;vertical-align:middle;width:150px;max-width:100%;height:38px;margin:3px 4px;padding:5px 9px;border:1px solid #cbd8dd;border-radius:7px;background:#fff;color:var(--sun-navy);font-size:14px;font-weight:600;box-shadow:inset 0 1px 2px rgba(7,52,81,.03)}
+    .summary-blank:focus{outline:0;border-color:var(--sun-teal);box-shadow:0 0 0 .18rem rgba(0,107,120,.14)}
+    .summary-blank.is-answered{border-color:#8abdb6;background:#f7fffd}
+    .word-limit{display:inline-flex;align-items:center;gap:6px;background:#fff3d8;border:1px solid #f2dfb4;border-radius:7px;padding:7px 10px;color:#76500a;font-size:12px;font-weight:800;margin:0 0 14px}
+    .summary-help{font-size:12px;color:var(--sun-muted);margin-top:13px}
+    .answer-status{font-size:12px;color:var(--sun-teal);font-weight:700;white-space:nowrap}
+    @media(max-width:767.98px){.summary-panel{padding:13px}.summary-copy{font-size:14px;line-height:2.5}.summary-blank{width:125px;height:36px}.summary-title{font-size:16px}}
+
+    /* ---------- RESPONSIVE ---------- */
+    @media(max-width:1399.98px){
+      .brand-logo{width:190px}.main-nav .nav-link{font-size:13px;padding-left:.45rem!important;padding-right:.45rem!important}
+      .exam-title{font-size:34px}.passage-toolbar{padding-left:22px;padding-right:22px}
+      .passage-scroll{padding-left:25px;padding-right:25px}.question-top,.question-scroll{padding-left:24px;padding-right:24px}
+      .progress{width:240px}.headings-layout{grid-template-columns:minmax(0,1fr) 255px}
+    }
+    @media(max-width:1199.98px){
+      .headings-layout{grid-template-columns:1fr}.heading-list-card{order:-1}
+      .heading-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:991.98px){
+      body{overflow:auto}.site-header{height:auto}.site-navbar{height:auto;min-height:72px}
+      .navbar-collapse{margin-top:10px;padding:12px;background:#fff;border-radius:12px;box-shadow:var(--sun-shadow)}
+      .student-user{color:var(--sun-navy);margin-top:8px}
+      .exam-header{height:auto;min-height:76px}.exam-header-inner{min-height:76px}
+      .exam-title{font-size:28px}.exam-subtitle{font-size:15px}
+      .reading-app{height:auto;min-height:0;display:block}
+      .reading-pane,.question-pane{width:100%;max-width:100%;height:600px}
+      .reading-pane{border-right:0;border-bottom:5px solid #edf1ef}.question-pane{height:auto;min-height:700px}
+      .bottom-bar{height:auto;min-height:88px}.bottom-bar-inner{padding-top:15px;padding-bottom:15px}
+    }
+    @media(max-width:767.98px){
+      .brand-logo{width:165px}.exam-title{font-size:23px}.exam-divider{height:25px;margin:0 12px}.exam-subtitle{font-size:13px}
+      .timer-box{min-width:auto;height:48px;padding:5px 9px;gap:6px}.timer-icon{font-size:21px}.timer-label{display:none}.timer-value{font-size:17px}
+      .reading-pane{height:540px}.question-pane{min-height:720px}
+      .passage-toolbar{height:62px;padding:7px 10px;gap:4px;overflow-x:auto}.tool-tab{padding:0 11px;font-size:12px}.tool-action{min-width:70px;font-size:12px}
+      .passage-scroll{height:calc(100% - 62px);padding:18px}.passage-title{font-size:25px}
+      .paragraph{grid-template-columns:34px minmax(0,1fr);gap:11px;margin-bottom:17px}.paragraph-label{width:34px;height:34px}.paragraph-text{font-size:14px}
+      .question-top{height:61px;padding:0 15px}.question-count{font-size:16px}.question-filter{padding:8px 9px;font-size:11px}
+      .question-navigation{padding:8px 10px}.question-number,.question-arrow{width:35px;height:35px;flex-basis:35px}
+      .question-scroll{height:auto;max-height:none;padding:10px 12px 20px}.question-card-header{padding:0 14px}.question-heading{font-size:18px}
+      .flag-button{font-size:11px}.question-body{padding:14px}.question-text{font-size:15px}
+      .heading-list{grid-template-columns:1fr}.answer-row{grid-template-columns:32px minmax(0,1fr)}.heading-list li{font-size:12px}
+      .question-footer{height:auto;padding:12px}.btn-question{min-height:46px;font-size:13px}
+      .progress-area{order:3;width:100%}.progress{flex:1;width:auto}
+      .review-button,.save-button{min-height:46px;padding:0 10px;font-size:12px;width:100%}
+    }
+    @media(max-width:480px){
+      .exam-subtitle,.exam-divider{display:none}.exam-title{font-size:21px}.timer-box{margin-left:auto}
+      .question-footer{display:grid;grid-template-columns:1fr 1fr}.btn-next,.btn-previous{width:100%}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
+    <div class="container-fluid px-3 px-xl-5 site-navbar">
+      <a class="navbar-brand" href="index.html">
+        <div class="brand-icon">
+          <i class="bi bi-sun"></i>
+        </div>
+        <div>
+          <div class="brand-title">
+            Sunshine IELTS Prep
+          </div>
+          <div class="brand-subtitle">
+            LEARN · BELIEVE · ACHIEVE
+          </div>
+        </div>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation"
+              aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavigation">
+        <ul class="navbar-nav mx-auto main-nav align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <!-- <li class="nav-item"><a class="nav-link" href="ielts.html">IELTS</a></li>
+          <li class="nav-item"><a class="nav-link" href="pte.html">PTE</a></li>
+          <li class="nav-item"><a class="nav-link" href="computer-courses.html">Computer Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="study-abroad.html">Study Abroad</a></li> -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ielts Reading</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="sunshinemcqreading.html">Academy Reading</a></li>
+              <li><a class="dropdown-item" href="sunshine-reading-master-matching-headings-bootstrap-5-3-8.html">General Reading</a></li>
+            </ul>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          </li>
+        </ul>
+
+        <div class="student-user ms-lg-3">
+          <span class="student-avatar"><i class="bi bi-person-circle avatar"></i></span>
+          <p class="intro">Hi, Student</p>
+          <i class="bi bi-chevron-down small intro-sign"></i>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<section class="exam-header" aria-label="Reading test header">
+  <div class="container-fluid px-3 px-xl-5 exam-header-inner">
+    <div class="d-flex align-items-center justify-content-between h-100">
+      <div class="d-flex align-items-center min-w-0">
+        <h1 class="exam-title">Sunshine Reading</h1>
+        <span class="exam-divider" aria-hidden="true"></span>
+        <span class="exam-subtitle">Academic Reading Practice</span>
+      </div>
+
+      <div class="timer-box" aria-label="Time remaining">
+        <i class="bi bi-stopwatch timer-icon" aria-hidden="true"></i>
+        <div>
+          <div class="timer-label">Time Remaining</div>
+          <div class="timer-value" id="timer">58:42</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="reading-app">
+
+  <!-- ================= LEFT: PASSAGE ================= -->
+  <section class="reading-pane" aria-labelledby="passageTitle">
+    <div class="passage-toolbar">
+      <button type="button" class="tool-tab active" id="passageTab">
+        <i class="bi bi-file-earmark-text"></i> Reading Passage
+      </button>
+      <button type="button" class="tool-tab" id="informationTab">
+        <i class="bi bi-info-circle"></i> Information
+      </button>
+      <div class="toolbar-spacer"></div>
+      <button type="button" class="tool-action" id="highlightButton">
+        <i class="bi bi-highlighter"></i> Highlight <i class="bi bi-chevron-down"></i>
+      </button>
+      <button type="button" class="tool-action" id="notesButton">
+        <i class="bi bi-journal-text"></i> Notes
+      </button>
+      <button type="button" class="tool-action fullscreen-btn" id="passageFullscreen" aria-label="Full screen passage">
+        <i class="bi bi-arrows-fullscreen"></i>
+      </button>
+    </div>
+
+    <article class="passage-scroll" id="passageScroll">
+      <h2 class="passage-title" id="passageTitle">The Future of Urban Forests</h2>
+
+      <div class="paragraph">
+        <div class="paragraph-label">A</div>
+        <p class="paragraph-text">
+          Cities around the world are experiencing rapid growth, and as urban populations increase,
+          the pressure on natural environments becomes more intense. In response, many city planners
+          and policymakers are turning to urban forests – trees and green spaces within cities – as a
+          practical solution to a range of environmental, social and economic challenges.
+        </p>
+      </div>
+
+      <div class="paragraph">
+        <div class="paragraph-label">B</div>
+        <p class="paragraph-text">
+          Urban forests can take many forms, from tree-lined streets and pocket parks to large urban
+          woodlands. These green spaces are more than just attractive features. They play an essential
+          role in improving air quality by absorbing carbon dioxide and filtering pollutants. Trees
+          also help to regulate temperatures, reducing the urban heat island effect, which can make
+          cities significantly hotter than surrounding rural areas.
+        </p>
+      </div>
+
+      <div class="paragraph">
+        <div class="paragraph-label">C</div>
+        <p class="paragraph-text">
+          In addition to environmental benefits, urban forests contribute to the well-being of city
+          residents. Research has shown that access to green spaces can reduce stress, improve mental
+          health and encourage physical activity. Parks and tree-lined areas provide places for people
+          to relax, socialise and connect with nature, even in the heart of a busy city.
+        </p>
+      </div>
+
+      <div class="paragraph">
+        <div class="paragraph-label">D</div>
+        <p class="paragraph-text">
+          Despite these advantages, creating and maintaining urban forests is not without challenges.
+          Land in cities is often limited and expensive, and there can be competing demands for space,
+          such as housing, transport and commercial development. Furthermore, trees require long-term
+          care, including watering, pruning and protection from pests and diseases. Without proper
+          planning and investment, urban forests may struggle to survive.
+        </p>
+      </div>
+
+      <div class="paragraph">
+        <div class="paragraph-label">E</div>
+        <p class="paragraph-text">
+          Many cities are now adopting innovative strategies to expand their urban forests. Some are
+          introducing “green roofs” on buildings, while others are transforming unused land into
+          community gardens or mini-forests. Technology is also playing a role, with data and digital
+          tools helping planners monitor tree health and identify areas where new green spaces could
+          have the greatest impact.
+        </p>
+      </div>
+
+      <div class="paragraph">
+        <div class="paragraph-label">F</div>
+        <p class="paragraph-text">
+          The future of urban forests will depend on continued cooperation between governments,
+          communities and environmental organisations. Successful projects require not only funding
+          but also long-term commitment. As cities continue to grow, integrating nature into urban
+          planning may become increasingly important for creating healthier and more sustainable
+          places to live.
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= RIGHT: SUMMARY COMPLETION QUESTIONS ================= -->
+  <section class="question-pane" aria-labelledby="questionAreaTitle">
+    <div class="question-top">
+      <h2 class="question-count" id="questionAreaTitle">Questions 14 – 20 of 40</h2>
+      <button type="button" class="question-filter" id="questionFilter" aria-label="Question type">
+        <i class="bi bi-list-ul me-1"></i> Summary Completion <i class="bi bi-chevron-down ms-1"></i>
+      </button>
+    </div>
+    <div class="question-navigation">
+      <div class="question-nav-scroll">
+        <button type="button" class="question-arrow" id="previousQuestionTop" aria-label="Previous question"><i class="bi bi-chevron-left"></i></button>
+        <div id="questionNumbers" class="d-flex gap-2" aria-label="Question navigation"></div>
+        <button type="button" class="question-arrow" id="nextQuestionTop" aria-label="Next question"><i class="bi bi-chevron-right"></i></button>
+      </div>
+    </div>
+    <div class="question-scroll">
+      <article class="question-card">
+        <header class="question-card-header">
+          <h3 class="question-heading" id="currentQuestionHeading">Question 14</h3>
+          <button type="button" class="flag-button" id="flagQuestion" aria-pressed="false"><i class="bi bi-bookmark"></i><span>Flag for review</span></button>
+        </header>
+        <div class="question-body">
+          <p class="instruction mb-2">Complete the summary below.</p>
+          <div class="word-limit"><i class="bi bi-pencil-square"></i> NO MORE THAN TWO WORDS from the passage for each answer</div>
+          <section class="summary-panel" aria-labelledby="summaryTitle">
+            <h4 class="summary-title" id="summaryTitle">The benefits of urban forests</h4>
+            <p class="summary-copy">
+              Urban forests help improve <strong>(14)</strong>
+              <input class="form-control summary-blank" id="answer-14" data-question="14" aria-label="Answer to question 14" autocomplete="off" spellcheck="false"> by absorbing harmful gases and filtering pollutants. They can also lower city temperatures and reduce the <strong>(15)</strong>
+              <input class="form-control summary-blank" id="answer-15" data-question="15" aria-label="Answer to question 15" autocomplete="off" spellcheck="false"> effect, making urban areas cooler.
+            </p>
+            <p class="summary-copy mt-3">
+              In addition to environmental advantages, access to green spaces can improve people's <strong>(16)</strong>
+              <input class="form-control summary-blank" id="answer-16" data-question="16" aria-label="Answer to question 16" autocomplete="off" spellcheck="false"> and encourage them to be more physically active. Although urban forests provide many benefits, they require ongoing <strong>(17)</strong>
+              <input class="form-control summary-blank" id="answer-17" data-question="17" aria-label="Answer to question 17" autocomplete="off" spellcheck="false">, including watering and pruning, to ensure they remain healthy.
+            </p>
+            <p class="summary-copy mt-3">
+              Cities must also address the <strong>(18)</strong>
+              <input class="form-control summary-blank" id="answer-18" data-question="18" aria-label="Answer to question 18" autocomplete="off" spellcheck="false"> cost of land and balance competing demands for space. Some are creating community gardens and green roofs, while others use <strong>(19)</strong>
+              <input class="form-control summary-blank" id="answer-19" data-question="19" aria-label="Answer to question 19" autocomplete="off" spellcheck="false"> tools to support planning. Long-term success depends on cooperation and continued <strong>(20)</strong>
+              <input class="form-control summary-blank" id="answer-20" data-question="20" aria-label="Answer to question 20" autocomplete="off" spellcheck="false"> from local communities and governments.
+            </p>
+            <p class="summary-help mb-0"><i class="bi bi-info-circle me-1"></i> Type your answers into the boxes. Answers are saved locally in this browser when you select Save &amp; Continue.</p>
+          </section>
+        </div>
+      </article>
+    </div>
+    <div class="question-footer">
+      <button type="button" class="btn btn-question btn-previous" id="previousQuestion"><i class="bi bi-arrow-left"></i> Previous</button>
+      <button type="button" class="btn btn-question btn-next" id="nextQuestion">Next Question <i class="bi bi-arrow-right"></i></button>
+    </div>
+  </section>
+</main>
+
+<footer class="bottom-bar">
+  <div class="container-fluid px-3 px-xl-4 bottom-bar-inner">
+    <div class="row h-100 align-items-center g-3">
+
+      <div class="col-6 col-lg-3">
+        <button type="button" class="btn review-button" id="reviewLater">
+          <i class="bi bi-journal-check me-2"></i> Review Later <span id="reviewCount">(0)</span>
+        </button>
+      </div>
+
+      <div class="col-12 col-lg-6 order-3 order-lg-0">
+        <div class="progress-area">
+          <span class="progress-label">Progress</span>
+          <div class="progress" role="progressbar" aria-label="Test progress" aria-valuenow="14" aria-valuemin="0" aria-valuemax="40">
+            <div class="progress-bar" id="progressBar" style="width:35%"></div>
+          </div>
+          <span class="progress-number"><span id="currentProgress">14</span>/40</span>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-3 text-lg-end">
+        <button type="button" class="btn save-button" id="saveContinue">
+          Save &amp; Continue <i class="bi bi-arrow-right ms-1"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+<script>
+/* Sunshine Reading — Summary Completion master interaction.
+   The site shell is shared with other question types; this renderer handles typed summary blanks. */
+const TEST_CONFIG = {
+  type: "summary-completion",
+  totalQuestions: 40,
+  sectionStart: 14,
+  sectionEnd: 20,
+  timeSeconds: 58 * 60 + 42,
+  maxWords: 2
+};
+const state = { currentQuestion: 14, reviewCount: 0, flaggedQuestions: {}, answers: {} };
+const questionNumbers = document.getElementById("questionNumbers");
+for (let q = TEST_CONFIG.sectionStart; q <= TEST_CONFIG.sectionEnd; q++) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "question-number" + (q === state.currentQuestion ? " active" : "");
+  button.dataset.question = q;
+  button.textContent = q;
+  button.setAttribute("aria-label", `Go to question ${q}`);
+  questionNumbers.appendChild(button);
+}
+function updateQuestionStatus() {
+  document.querySelectorAll(".question-number").forEach(btn => {
+    const q = Number(btn.dataset.question);
+    btn.classList.toggle("active", q === state.currentQuestion);
+    btn.classList.toggle("answered", Boolean(state.answers[q] && state.answers[q].trim()));
+    btn.setAttribute("aria-current", q === state.currentQuestion ? "step" : "false");
+  });
+}
+function setQuestion(q) {
+  if (q < TEST_CONFIG.sectionStart || q > TEST_CONFIG.sectionEnd) return;
+  state.currentQuestion = q;
+  document.getElementById("currentProgress").textContent = q;
+  document.getElementById("currentQuestionHeading").textContent = `Question ${q}`;
+  const pct = Math.min((q / TEST_CONFIG.totalQuestions) * 100, 100);
+  document.getElementById("progressBar").style.width = `${pct}%`;
+  document.querySelector(".progress").setAttribute("aria-valuenow", q);
+  document.querySelector(".question-count").textContent = `Questions ${TEST_CONFIG.sectionStart} – ${TEST_CONFIG.sectionEnd} of ${TEST_CONFIG.totalQuestions}`;
+  state.flagged = Boolean(state.flaggedQuestions[q]);
+  const flag = document.getElementById("flagQuestion");
+  flag.setAttribute("aria-pressed", String(state.flagged));
+  flag.querySelector("i").className = state.flagged ? "bi bi-bookmark-fill" : "bi bi-bookmark";
+  updateQuestionStatus();
+}
+document.querySelectorAll(".question-number").forEach(btn => btn.addEventListener("click", () => setQuestion(Number(btn.dataset.question))));
+document.getElementById("previousQuestion").addEventListener("click", () => setQuestion(state.currentQuestion - 1));
+document.getElementById("previousQuestionTop").addEventListener("click", () => setQuestion(state.currentQuestion - 1));
+document.getElementById("nextQuestion").addEventListener("click", () => setQuestion(state.currentQuestion + 1));
+document.getElementById("nextQuestionTop").addEventListener("click", () => setQuestion(state.currentQuestion + 1));
+
+document.querySelectorAll(".summary-blank").forEach(input => {
+  input.addEventListener("input", () => {
+    const q = Number(input.dataset.question);
+    state.answers[q] = input.value;
+    input.classList.toggle("is-answered", Boolean(input.value.trim()));
+    updateQuestionStatus();
+  });
+  input.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      const next = document.getElementById(`answer-${Number(input.dataset.question) + 1}`);
+      if (next) next.focus();
+    }
+  });
+});
+
+document.getElementById("flagQuestion").addEventListener("click", () => {
+  state.flagged = !state.flagged;
+  state.flaggedQuestions[state.currentQuestion] = state.flagged;
+  const button = document.getElementById("flagQuestion");
+  button.setAttribute("aria-pressed", String(state.flagged));
+  button.querySelector("i").className = state.flagged ? "bi bi-bookmark-fill" : "bi bi-bookmark";
+});
+document.getElementById("reviewLater").addEventListener("click", () => {
+  const key = state.currentQuestion;
+  if (!state.reviewed) state.reviewed = {};
+  if (!state.reviewed[key]) { state.reviewed[key] = true; state.reviewCount++; }
+  else { state.reviewed[key] = false; state.reviewCount = Math.max(0, state.reviewCount - 1); }
+  document.getElementById("reviewCount").textContent = `(${state.reviewCount})`;
+  document.getElementById("reviewLater").classList.toggle("active", Boolean(state.reviewed[key]));
+});
+
+let remainingSeconds = TEST_CONFIG.timeSeconds;
+function updateTimer() {
+  const minutes = Math.floor(remainingSeconds / 60), seconds = remainingSeconds % 60;
+  document.getElementById("timer").textContent = `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+  if (remainingSeconds > 0) remainingSeconds--;
+  else { document.getElementById("timer").setAttribute("aria-label", "Time is up"); }
+}
+updateTimer();
+const timerInterval = setInterval(() => { if (remainingSeconds > 0) updateTimer(); else clearInterval(timerInterval); }, 1000);
+
+document.getElementById("highlightButton").addEventListener("click", () => {
+  const selection = window.getSelection();
+  if (!selection || !selection.toString().trim() || !selection.rangeCount) return;
+  try { const mark = document.createElement("mark"); mark.className = "passage-highlight"; selection.getRangeAt(0).surroundContents(mark); selection.removeAllRanges(); }
+  catch (error) { console.warn("Highlight could not be applied to this selection."); }
+});
+document.getElementById("notesButton").addEventListener("click", () => {
+  const note = window.prompt("Add a note for this passage:", localStorage.getItem("sunshineReadingNote") || "");
+  if (note !== null) localStorage.setItem("sunshineReadingNote", note.trim());
+});
+document.getElementById("passageFullscreen").addEventListener("click", async () => {
+  const passage = document.querySelector(".reading-pane");
+  try { if (!document.fullscreenElement) await passage.requestFullscreen(); else await document.exitFullscreen(); }
+  catch (error) { console.warn("Fullscreen is not available in this browser/context."); }
+});
+function collectPayload() {
+  return { type: TEST_CONFIG.type, question: state.currentQuestion, answers: state.answers,
+    flaggedQuestions: state.flaggedQuestions, reviewed: state.reviewed || {}, reviewCount: state.reviewCount,
+    remainingSeconds, savedAt: new Date().toISOString() };
+}
+document.getElementById("saveContinue").addEventListener("click", () => {
+  localStorage.setItem("sunshineReadingSummaryProgress", JSON.stringify(collectPayload()));
+  const button = document.getElementById("saveContinue"), original = button.innerHTML;
+  button.innerHTML = '<i class="bi bi-check2-circle me-1"></i> Saved';
+  button.setAttribute("aria-live", "polite");
+  setTimeout(() => { button.innerHTML = original; }, 1400);
+});
+try {
+  const saved = localStorage.getItem("sunshineReadingSummaryProgress");
+  if (saved) {
+    const payload = JSON.parse(saved);
+    if (payload.type === TEST_CONFIG.type) {
+      state.answers = payload.answers || {};
+      state.flaggedQuestions = payload.flaggedQuestions || {};
+      state.reviewed = payload.reviewed || {};
+      state.reviewCount = Number(payload.reviewCount || 0);
+      if (payload.remainingSeconds > 0) remainingSeconds = payload.remainingSeconds;
+      Object.entries(state.answers).forEach(([q, answer]) => {
+        const input = document.getElementById(`answer-${q}`);
+        if (input) { input.value = answer; input.classList.toggle("is-answered", Boolean(String(answer).trim())); }
+      });
+      document.getElementById("reviewCount").textContent = `(${state.reviewCount})`;
+      setQuestion(Number(payload.question) || TEST_CONFIG.sectionStart);
+      updateTimer();
+    }
+  }
+} catch (error) { console.warn("Saved summary-completion progress could not be restored."); }
+</script>
+
+</body>
+</html>
